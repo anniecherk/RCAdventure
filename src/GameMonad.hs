@@ -1,5 +1,5 @@
 module GameMonad
-    ( GameMonad, Room, showRoomDescription, seeAdjacentRooms, initRoom, getRoom
+    ( GameMonad, Room, showRoomDescription, seeAdjacentRooms, initRoom, getRoom, makeRoom
     ) where
 
 
@@ -37,7 +37,11 @@ seeAdjacentRooms McCarthy = [MainSpace]
 seeAdjacentRooms Library = [MainSpace]
 seeAdjacentRooms MainSpace = [Kitchen, McCarthy, Library]
 
-
+makeRoom :: String -> Room
+makeRoom "Kitchen" = Kitchen
+makeRoom "McCarthy" = McCarthy
+makeRoom "Library" = Library
+makeRoom "MainSpace" = MainSpace
 
 initRoom :: GameMonad Room
 initRoom = CurrentRoom Kitchen
