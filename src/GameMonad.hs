@@ -5,19 +5,24 @@ module GameMonad
 
 -- TODO : Add name
               -- current room
-data GameMonad = Room deriving(Monad, Show, Eq)
+data GameMonad = Room deriving(Show, Eq)
 
-       -- name description adjacent-rooms
-data Room = String String [Room]
+       -- name description adjacent-rooms   *need options
+--data Room = String String [Room]
+data Room = Kitchen | McCarthy
+
+instance Monad
 
 
 
 changeRooms :: Int -> GameMonad
 changeRooms =
 
-showRoomDescription ::
+showRoomDescription :: Room -> String
+showRoomDescription Kitchen = ...
 
 seeAdjacentRooms ::
+
 
 
 
