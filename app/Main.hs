@@ -3,7 +3,9 @@ module Main where
 import GameMonad
 
 main :: IO ()
-main = someFunc
+main = do
+    let initRoom = initGame
+    putStrLn $ show $ fmap showRoomDescription initRoom
 
 -- init a game monad
 -- display to screen & wait for input
@@ -14,5 +16,11 @@ main = someFunc
 -- second iteration: set up change room, maybe with just 2 rooms
 
 
-changeRooms :: Room -> (GameMonad Room)
-changeRooms =
+--changeRooms :: Room -> GameMonad
+--changeRooms room = 
+
+
+
+    -- display seeAdjacentRooms
+    -- solict user input and return their preference
+    -- switch game monad to that room
