@@ -1,5 +1,5 @@
 module GameMonad
-    ( GameMonad, Room, showRoomDescription, seeAdjacentRooms, initGame
+    ( GameMonad, Room, showRoomDescription, seeAdjacentRooms, initRoom, getRoom
     ) where
 
 
@@ -9,7 +9,7 @@ data GameMonad room = CurrentRoom room deriving(Show, Eq)
 
        -- name description adjacent-rooms   *need options
 --data Room = String String [Room]
-data Room = Kitchen | McCarthy | Library | MainSpace
+data Room = Kitchen | McCarthy | Library | MainSpace deriving(Show, Eq)
 
 instance Monad GameMonad where
     return room = (CurrentRoom room) --makes a gamemonad
@@ -22,7 +22,8 @@ instance Applicative GameMonad where
     pure = return
     (CurrentRoom f) <*> (CurrentRoom room) = (CurrentRoom $ f room)
 
-
+getRoom :: GameMonad r -> r
+getRoom (CurrentRoom room) = room
 
 showRoomDescription :: Room -> String
 showRoomDescription Kitchen = "Where everything begins. We eat things here"
@@ -38,7 +39,7 @@ seeAdjacentRooms MainSpace = [Kitchen, McCarthy, Library]
 
 
 
-initGame :: GameMonad Room
-initGame = CurrentRoom Kitchen
+initRoom :: GameMonad Room
+initRoom = CurrentRoom Kitchen
 
 

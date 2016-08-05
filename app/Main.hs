@@ -3,9 +3,22 @@ module Main where
 import GameMonad
 
 main :: IO ()
-main = do
-    let initRoom = initGame
-    putStrLn $ show $ fmap showRoomDescription initRoom
+main = gameLoop initRoom
+
+gameLoop :: GameMonad Room -> IO()
+gameLoop currentRoom = do 
+    putStrLn $ show $ fmap showRoomDescription currentRoom
+    putStrLn "Here are the adjacent rooms"
+    putStrLn $ show $ seeAdjacentRooms $ getRoom currentRoom
+    putStrLn "Which room do you want to go into?"
+    userinput <- getLine
+    if (userinput == "bye")
+        then putStrLn "bye"
+        else gameLoop currentRoom
+    --  if user input was exit say "bye"
+        -- otherwise call gameloop again
+  --  gameLoop $ changeRooms userInput -- gets us a new gamestate
+
 
 -- init a game monad
 -- display to screen & wait for input
